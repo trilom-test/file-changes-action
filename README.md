@@ -6,33 +6,37 @@ This action will take the information from the Push/Pull Request and output some
 
 ### githubToken
 
-**Required**  - string - your github token
+**Required**  - `string` - your github token
 
 ### output
 
-_Optional_  - string - type of output for output variables, default is json.  Use ',' for comma separated values, or ' ' for space delimited values.  You can also create your own delimiter for example ' |FILE:' will output 'file1.yml |FILE:file2.yml |FILE:file3.yml'.
+_Optional_  - `string` - type of output for output variables, default is json.  Use ',' for comma separated values, or ' ' for space delimited values.  You can also create your own delimiter for example ' |FILE:' will output 'file1.yml |FILE:file2.yml |FILE:file3.yml'.
 
 ### fileOutput
 
-_Optional_  - string - type of output for file output, default is json.  Use ',' for comma separated values, or ' ' for space delimited values.  You can also create your own delimiter for example ' |FILE:' will output 'file1.yml |FILE:file2.yml |FILE:file3.yml'.  If you select json then the file format will be .json, if you select ',' then the file format will be .csv, anything else will output the files as .txt
+_Optional_  - `string` - type of output for file output, default is json.  Use ',' for comma separated values, or ' ' for space delimited values.  You can also create your own delimiter for example `\ |FILE:` will output:
+
+> file1.yml |FILE:file2.yml |FILE:file3.yml  
+
+If you select json then the file format will be .json, if you select ',' then the file format will be .csv, anything else will output the files as .txt
 
 ## Outputs
 
 ### files
 
-**Required** - string - The names all new, updated, and deleted files.  The output is dependant on the output input, default is a json string.
+**Required** - `string` - The names all new, updated, and deleted files.  The output is dependant on the output input, default is a json string.
 
 ### files_added
 
-**Required** - string - The names of the newly created files.  The output is dependant on the output input, default is a json string.
+**Required** - `string` - The names of the newly created files.  The output is dependant on the output input, default is a json string.
 
 ### files_modified
 
-**Required** - string - The names of the updated files.  The output is dependant on the output input, default is a json string.
+**Required** - `string` - The names of the updated files.  The output is dependant on the output input, default is a json string.
 
 ### files_deleted
 
-**Required** - string - The names of the deleted files.  The output is dependant on the output input, default is a json string.
+**Required** - `string` - The names of the deleted files.  The output is dependant on the output input, default is a json string.
 
 ## Example usage
 
@@ -158,4 +162,38 @@ jobs:
       - name: test
         run: |
           cat $HOME/files.txt
+```
+
+## Contributing
+
+1. Fork the master branch from the repo.
+
+2. Make your changes in the `src` directory to the typescript files.  Once satisfied, or along the way you can run `make run COMMAND=format` to make your code pretty, and `make run COMMAND=lint` to validate it.  You must pull the dependencies with `make run COMMAND=build` in order to run these commands.
+
+3. **NOT IMPLEMENTED** Run `make run COMMAND=test` to test your changes prior to releasing.
+
+4. To initiate a release please attempt a PR to the `master` branch, this will trigger the workflow for production testing.  Your PR to `master` should not include code in `node_modules`, `dist`, or `lib` these are left for the release process and are in the master for local building.
+
+5. Once PR is accepted and merged into master, this will trigger the workflow to release to `releases/v1` which will persist on the Github Action Marketplace.
+
+
+ 
+```bash
+# install project dependencies (including devDependencies)
+yarn
+# build the project (dist files)
+yarn build
+# build and lint
+
+# run prettier (this will make your ugly code pretty)
+yarn format
+# dry-run prettier (this will tell you if your ugly code needs to be made pretty)
+yarn format-check
+# lint project
+yarn lint
+# test
+yarn jest
+
+# clean duh
+yarn clean
 ```
