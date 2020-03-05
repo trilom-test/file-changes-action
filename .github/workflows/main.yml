@@ -19,7 +19,7 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo "$GITHUB_EVENT_PATH"
-          cat $(echo '$GITHUB_EVENT_PATH')
+          cat $(echo $GITHUB_EVENT_PATH)
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
