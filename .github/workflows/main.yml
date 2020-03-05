@@ -2,13 +2,6 @@ name: CI
 
 on: 
   push:
-  pull_request: 
-    types: [created, opened, reopened, syncronize]
-  schedule:
-    - cron: '*/3 * * * *'
-  issue_comment: 
-    types: [created, deleted, edited]
-  pull_request_review:
 
 jobs:
   build:
