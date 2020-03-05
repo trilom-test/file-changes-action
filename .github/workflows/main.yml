@@ -1,12 +1,16 @@
 name: CI
 
-on: [push]
+on: 
+  push:
+  pull_request:
+  schedule:
+    - cron: '*/3 * * * *'
+  issue_comment: [created, deleted, edited]
+  pull_request_review:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Dump GitHub context
         env:
